@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ds:DataStory xmlns:ds="http://example.com/ds/" xmlns:dct="http://purl.org/dc/terms/" xml:lang="en">
+    <ds:Metadata>
+        <dct:title>The 1918-19 flu epidemic in The Netherlands</dct:title>
+        <dct:creator>Thomas de Groot</dct:creator>
+        <dct:creator>Wouter Beek</dct:creator>
+        <dct:license>http://creativecommons.org/licenses/by-sa/4.0/</dct:license>
+        <LandingPage>https://stories.datalegend.net/spanishFluNetherlands/</LandingPage>
+    </ds:Metadata>
+    <ds:Story>
+        <ds:Block xml:id="b1" type="text" mime="text/markdown">
+            <ds:Metadata>
+                <dct:title>The dataset</dct:title>
+            </ds:Metadata>
+            <ds:Cues>
+                <title-prologue># I. {$ds-Metadata/dct:title}</title-prologue>
+            </ds:Cues>
+            Thanks to the indexation efforts of archives and the
+            [LINKS project](https://iisg.amsterdam/en/hsn/projects/links), large parts of the Dutch civil registry
+            (_'Burgerlijke Stand'_) are now becoming available for historians. The death certificates used here are
+            retrieved from [openarch.nl](https://www.openarch.nl/)
+            (available [here](https://www.openarch.nl/exports/5cfb55ebaf9fe5aaf216f6da1229c632/)). From the individual 
+            death certificates files per archive, one combined dataset was created. One challenge of working with these 
+            certificates is that that the same certificate may have been indexed by more than one archive. These were 
+            de-duplicated using a combination of date of death, location and similar full names (using string distances). 
+            Key variables were subsequently cleaned and standardized, such as age at death, placenames, and occupations. 
+            Using different string match combinations, place names were standardized against the 
+            [Historical Dutch Toponyms dataset](https://iisg.amsterdam/en/hsn/data/place-names), to retrieve coordinates 
+            and Amsterdam Codes. Occupations were matched against the file 
+            [HSN Occupations](https://iisg.amsterdam/en/hsn/data/occupations) to retrieve HISCO, HISCLASS and HISCAM 
+            categorizations. All related R scripts can be found at our [Github repository](https://github.com/CLARIAH/wp4-civreg).
+            The dataset was then converted into Linked Data with [COW](https://github.com/CLARIAH/COW), using the "Persons table" 
+            datamodel designed by Gerrit Bloothooft and Kees Mandemakers in the LINKS project. The complete Linked Dataset and the
+            related metadata scheme can be explored at [Druid](https://druid.datalegend.net/dataLegend/deaths-1910-1920/)
+            
+            The table below demonstrates the success of the standardization efforts, presented as Linked Data. 
+        </ds:Block>
+        <ds:Block xml:id="b2" type="query" mime="sparql" href="queries/standardization_share.rq">
+            <ds:Metadata>
+                <dct:title>Share of death certificates with standardized places of death and occupations:</dct:title>
+            </ds:Metadata>
+        </ds:Block>
+        <ds:Block xml:id="b3" type="text" mime="text/markdown">
+            _Sources:_
+            Gerrit Bloothooft &amp; Kees Mandemakers, 
+            _[The Zeeland Challenge](http://www.gerritbloothooft.nl/Publications/The%20Zeeland%20Challenge%20v2-2.pdf)_, 
+            document for benchmark, presented at workshop Data Linkage: Techniques, Challenges and Applications at Isaac 
+            Newton Institute for Mathematics, Cambridge, UK, 15 September 2016; Van Leeuwen, M. H. D. , Maas, I. &amp; Miles, 
+            A. (2003). _HISCO: Historical International Standard Classification of Occupations_. Leuven: Leuven University 
+            Press; Zijdeman, R., &amp; Lambert, P. (2010). _Measuring social structure in the past: A comparison of historical
+            class schemes and occupational stratification scales on Dutch 19th and early 20th century data_. Journal of Belgian
+            History/Belgisch Tijdschrift voor Nieuwste Geschiedenis/Revue Belge de Histoire Contemporaine, 40(1-2), 111-141.
+        </ds:Block>
+        <ds:Block xml:id="b4" type="text" mime="text/markdown">
+            Because archives generally decide for themselves which variables from the civil registry they will index, occupations
+            of the deceased are not available for all regions. Archives from the provinces of Drenthe, Gelderland, and Zeeland are,
+            regrettably, the only ones to have structurally indexed all occupations of the deceased for this period.
+        </ds:Block>
+        <ds:Block xml:id="b5" type="query" mime="sparql" href="queries/occupation_share.rq" >
+            <ds:Metadata>
+                <dct:title>Share of known occupations of the deceased, aged eighteen and over, by municipality:</dct:title>
+            </ds:Metadata>
+            <ds:Cues>
+                <data-output>geo</data-output>
+            </ds:Cues>
+        </ds:Block>    
+    </ds:Story>
+    <ds:Data>
+        <ds:Run ref="all" when="2022-03-16" mime="application/warc" href="flu.warc.gz"/>
+        <ds:Run ref="b2" when="2022-03-30" mime="text/csv" href="data/standardization_share.csv"/>
+        <ds:Run ref="b5" when="2022-03-30" mime="text/csv" href="img/occupation_share-geo.csv"/>
+        <ds:Run ref="b5" when="2022-03-30" mime="image/png" href="img/occupation_share-geo.png"/>
+    </ds:Data>
+</ds:DataStory>
