@@ -144,7 +144,7 @@
             </ds:Metadata>
             <ds:Cues>
                 <wp4:data-output>table</wp4:data-output>
-                <dwp4:ata-output-config ds:type="json">{"pageSize":10}</dwp4:ata-output-config>
+                <wp4:data-output-config ds:type="json">{"pageSize":10}</wp4:data-output-config>
             </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
             &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
