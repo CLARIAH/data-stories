@@ -357,6 +357,7 @@ SELECT ?age (?1910/xsd:decimal(?total_1910)*100 as?share_1910)
                   
                   }
  }}
+ 
  ORDER BY ASC (?age) ]]></ds:Block>
         <ds:Block xml:id="b14" type="text" mime="text/markdown">Last, we examine whether people from
             certain occupations experienced higher death rates than usual. This could suggest they
@@ -384,32 +385,46 @@ SELECT ?age (?1910/xsd:decimal(?total_1910)*100 as?share_1910)
             <ds:Cues>
                 <wp4:data-output>table</wp4:data-output>
                 <wp4:data-output-config ds:type="json">{"pageSize":10}</wp4:data-output-config>
-            </ds:Cues><![CDATA[ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX schema:
-            <http://schema.org/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
-            <https://iisg.amsterdam/openarchdeaths1910_1920/vocab/> PREFIX iisgv2:
-            <https://iisg.amsterdam/openarchdeath/vocab/> PREFIX gg:
-            <http://www.gemeentegeschiedenis.nl/gg-schema#> PREFIX geo:
-            <http://www.opengis.net/ont/geosparql#> PREFIX bio:
-            <http://purl.org/vocab/bio/0.1/> PREFIX bif:
-            <http://www.openlinksw.com/schemas/bif#> SELECT ?unit_group ?occupational_group ?mean
-            ?1918 ?excess WHERE { FILTER(?mean >5) # to avoid 'division by 0' error FILTER(?1918 >0)
-            { select ?unit_group ?occupational_group (sum(if(?year =
-            "1918"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1918) (sum(if(?year =
-            "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910) (sum(if(?year =
-            "1911"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1911) (sum(if(?year =
-            "1912"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1912) (sum(if(?year =
-            "1913"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1913) (sum(if(?year =
-            "1914"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1914) (sum(if(?year =
-            "1915"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1915) (sum(if(?year =
-            "1916"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1916) (sum(if(?year =
-            "1917"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1917) { ?death a bio:Death
-            . ?death iisgv:deceased ?deceased . ?deceased iisgv:ageYears ?age . ?deceased
-            schema:hasOccupation ?occ. ?occ schema:categoryCode ?hisco . ?hisco rdfs:subClassOf
-            ?unit_group . ?unit_group schema:name ?occupational_group . ?death bio:date ?date .
-            BIND(year(?date) as ?year) FILTER(?age >= 18 &amp;&amp; ?age <= 45) }}
-            BIND(xsd:float(?1910+?1911+?1912+?1913+?1914+?1915+?1916+?1917)/8 as ?mean)
-            BIND(xsd:decimal(?1918/?mean) as ?excess) } ORDER BY DESC (?excess) ]]></ds:Block>
+            </ds:Cues><![CDATA[
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX schema: <http://schema.org/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX iisgv:  <https://iisg.amsterdam/openarchdeaths1910_1920/vocab/>
+PREFIX iisgv2: <https://iisg.amsterdam/openarchdeath/vocab/>
+PREFIX gg:     <http://www.gemeentegeschiedenis.nl/gg-schema#>
+PREFIX geo:    <http://www.opengis.net/ont/geosparql#>
+PREFIX bio:    <http://purl.org/vocab/bio/0.1/>
+PREFIX bif:     <http://www.openlinksw.com/schemas/bif#> 
+
+SELECT ?unit_group ?occupational_group ?mean ?1918 ?excess
+
+ WHERE {
+      FILTER(?mean >5) # to avoid 'division by 0' error
+      FILTER(?1918 >0)
+      { select ?unit_group ?occupational_group
+        (sum(if(?year = "1918"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1918)
+        (sum(if(?year = "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910)
+        (sum(if(?year = "1911"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1911)
+        (sum(if(?year = "1912"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1912)
+        (sum(if(?year = "1913"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1913)
+        (sum(if(?year = "1914"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1914)
+        (sum(if(?year = "1915"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1915)
+        (sum(if(?year = "1916"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1916)
+        (sum(if(?year = "1917"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1917)
+        { ?death a bio:Death .
+          ?death iisgv:deceased ?deceased .
+          ?deceased iisgv:ageYears ?age .
+          ?deceased schema:hasOccupation ?occ.
+          ?occ schema:categoryCode ?hisco .
+          ?hisco rdfs:subClassOf ?unit_group . 
+          ?unit_group schema:name ?occupational_group . 
+          ?death bio:date ?date .
+          BIND(year(?date) as ?year)
+          FILTER(?age >= 18 && ?age <= 45)
+        }
+      }
+      BIND(xsd:float(?1910+?1911+?1912+?1913+?1914+?1915+?1916+?1917)/8 as ?mean)
+      BIND(xsd:decimal(?1918/?mean) as ?excess) } ORDER BY DESC (?excess) ]]></ds:Block>
         <ds:Block xml:id="b16" type="query" mime="sparql">
             <ds:Metadata>
                 <dct:title>Correlation between mean excess mortality (ages 18-45) and social class
@@ -485,30 +500,51 @@ SELECT ?age (?1910/xsd:decimal(?total_1910)*100 as?share_1910)
         "chartType": "ScatterChart"
     }
 }]]></wp4:data-output-config>
-            </ds:Cues><![CDATA[ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX schema:
-            <http://schema.org/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
-            <https://iisg.amsterdam/openarchdeaths1910_1920/vocab/> PREFIX iisgv2:
-            <https://iisg.amsterdam/openarchdeath/vocab/> PREFIX gg:
-            <http://www.gemeentegeschiedenis.nl/gg-schema#> PREFIX geo:
-            <http://www.opengis.net/ont/geosparql#> PREFIX bio:
-            <http://purl.org/vocab/bio/0.1/> PREFIX bif:
-            <http://www.openlinksw.com/schemas/bif#> SELECT ?hiscam ?excess WHERE { FILTER(?mean
-            >2) # to avoid 'division by 0' error FILTER(?1918 >0) { select ?hiscam (sum(if(?year =
-            "1918"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1918) (sum(if(?year =
-            "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910) (sum(if(?year =
-            "1911"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1911) (sum(if(?year =
-            "1912"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1912) (sum(if(?year =
-            "1913"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1913) (sum(if(?year =
-            "1914"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1914) (sum(if(?year =
-            "1915"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1915) (sum(if(?year =
-            "1916"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1916) (sum(if(?year =
-            "1917"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1917) { ?death a bio:Death
-            . ?death iisgv:deceased ?deceased . ?deceased iisgv:ageYears ?age . ?deceased
-            schema:hasOccupation ?occ. ?occ iisgv2:hiscam_nl ?hiscam . ?death bio:date ?date .
-            BIND(year(?date) as ?year) FILTER(?age >= 18 &amp;&amp; ?age <= 45) FILTER(?hiscam
-            >39) }} BIND(xsd:float(?1910+?1911+?1912+?1913+?1914+?1915+?1916+?1917)/8 as ?mean)
-            BIND(xsd:decimal(?1918/?mean) as ?excess) } ORDER BY DESC (?excess) ]]></ds:Block>
+            </ds:Cues><![CDATA[
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX iisgv:  <https://iisg.amsterdam/openarchdeaths1910_1920/vocab/>
+PREFIX iisgv2: <https://iisg.amsterdam/openarchdeath/vocab/>
+PREFIX gg:     <http://www.gemeentegeschiedenis.nl/gg-schema#>
+PREFIX geo:    <http://www.opengis.net/ont/geosparql#>
+PREFIX bio:    <http://purl.org/vocab/bio/0.1/>
+PREFIX bif:    <http://www.openlinksw.com/schemas/bif#>
+
+SELECT ?hiscam ?excess
+
+ WHERE {
+ 
+         FILTER(?mean >2) # to avoid 'division by 0'
+         error FILTER(?1918 >0) {
+           select ?hiscam (sum(if(?year =
+            "1918"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1918)
+            (sum(if(?year = "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910)
+            (sum(if(?year = "1911"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1911)
+            (sum(if(?year = "1912"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1912)
+            (sum(if(?year = "1913"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1913)
+            (sum(if(?year = "1914"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1914)
+            (sum(if(?year = "1915"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1915)
+            (sum(if(?year = "1916"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1916)
+            (sum(if(?year = "1917"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1917)
+            { ?death a bio:Death .
+              ?death iisgv:deceased ?deceased .
+              ?deceased iisgv:ageYears ?age .
+              ?deceased schema:hasOccupation ?occ .
+              ?occ iisgv2:hiscam_nl ?hiscam .
+              ?death bio:date ?date .
+              
+              BIND(year(?date) as ?year)
+              FILTER(?age >= 18 &amp;&amp; ?age <= 45)
+              FILTER(?hiscam >39)
+            }
+           }
+           BIND(xsd:float(?1910+?1911+?1912+?1913+?1914+?1915+?1916+?1917)/8 as ?mean)
+           BIND(xsd:decimal(?1918/?mean) as ?excess)
+       }
+       
+ ORDER BY DESC (?excess) ]]></ds:Block>
         <ds:Block xml:id="b17" type="text" mime="text/markdown">
             <ds:Metadata>
                 <dct:title>Conclusion</dct:title>
