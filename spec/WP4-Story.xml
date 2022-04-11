@@ -14,7 +14,7 @@
                 <dct:title>The dataset</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <ds:title-prologue ds:type="template"># I. {$ds-Metadata/dct:title}</ds:title-prologue>
+                <ds:title-prologue type="template"># I. {$ds-Metadata/dct:title}</ds:title-prologue>
             </ds:Cues> Thanks to the indexation efforts of archives and the [LINKS
             project](https://iisg.amsterdam/en/hsn/projects/links), large parts of the Dutch civil
             registry (_'Burgerlijke Stand'_) are now becoming available for historians. The death
@@ -85,31 +85,84 @@
             </ds:Metadata>
             <ds:Cues>
                 <wp4:data-output>gchart</wp4:data-output>
-                <wp4:data-output-config ds:type="json"> { "chartConfig": { "options": {
-                    "hAxis": { "useFormatFromData": true, "viewWindow": { "max": null, "min": null
-                    }, "minValue": null, "maxValue": null }, "legacyScatterChartLabels": true,
-                    "tooltip": { "isHtml": true, "ignoreBounds": true }, "vAxes": [ {
-                    "useFormatFromData": true, "viewWindow": { "max": null, "min": null },
-                    "minValue": null, "maxValue": null }, { "useFormatFromData": true, "viewWindow":
-                    { "max": null, "min": null }, "minValue": null, "maxValue": null } ],
-                    "curveType": "", "booleanRole": "certainty", "lineWidth": 2, "legend": "right",
-                    "width": "100%", "height": "100%", "useFirstColumnAsDomain": true }, "state":
-                    {}, "view": { "columns": null, "rows": null }, "isDefaultVisualization": false,
-                    "chartType": "LineChart" } } </wp4:data-output-config>
-            </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
-            &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
-            &lt;https://iisg.amsterdam/openarchdeaths1910_1920/vocab/> PREFIX iisgv2:
-            &lt;https://iisg.amsterdam/openarchdeath/vocab/> PREFIX gg:
-            &lt;http://www.gemeentegeschiedenis.nl/gg-schema#> PREFIX geo:
-            &lt;http://www.opengis.net/ont/geosparql#> PREFIX bio:
-            &lt;http://purl.org/vocab/bio/0.1/> SELECT ?month (sum(if(?year =
-            "1910"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910) (sum(if(?year =
-            "1913"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1913) (sum(if(?year =
-            "1918"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1918) (sum(if(?year =
-            "1919"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1919) WHERE { ?death a
-            bio:Death . ?death iisgv:deceased ?deceased . ?death bio:date ?date .
-            BIND((month(?date)) as ?month) BIND(year(?date) as ?year) } ORDER BY ASC (?month) </ds:Block>
+                <wp4:data-output-config ds:type="json"><![CDATA[{
+    "chartConfig": {
+        "options": {
+            "hAxis": {
+                "useFormatFromData": true,
+                "viewWindow": {
+                    "max": null,
+                    "min": null
+                },
+                "minValue": null,
+                "maxValue": null
+            },
+            "legacyScatterChartLabels": true,
+            "tooltip": {
+                "isHtml": true,
+                "ignoreBounds": true
+            },
+            "vAxes": [
+                {
+                    "useFormatFromData": true,
+                    "viewWindow": {
+                        "max": null,
+                        "min": null
+                    },
+                    "minValue": null,
+                    "maxValue": null
+                },
+                {
+                    "useFormatFromData": true,
+                    "viewWindow": {
+                        "max": null,
+                        "min": null
+                    },
+                    "minValue": null,
+                    "maxValue": null
+                }
+            ],
+            "curveType": "",
+            "booleanRole": "certainty",
+            "lineWidth": 2,
+            "legend": "right",
+            "width": "100%",
+            "height": "100%",
+            "useFirstColumnAsDomain": true
+        },
+        "state": {},
+        "view": {
+            "columns": null,
+            "rows": null
+        },
+        "isDefaultVisualization": false,
+        "chartType": "LineChart"
+    }
+}]]></wp4:data-output-config>
+            </ds:Cues><![CDATA[
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX iisgv:  <https://iisg.amsterdam/openarchdeaths1910_1920/vocab/>
+PREFIX iisgv2: <https://iisg.amsterdam/openarchdeath/vocab/>
+PREFIX gg:     <http://www.gemeentegeschiedenis.nl/gg-schema#>
+PREFIX geo:    <http://www.opengis.net/ont/geosparql#>
+PREFIX bio:    <http://purl.org/vocab/bio/0.1/>
+
+SELECT ?month (sum(if(?year = "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910) 
+              (sum(if(?year = "1913"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1913)
+              (sum(if(?year = "1918"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1918)
+              (sum(if(?year = "1919"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1919)
+              
+ WHERE { ?death a bio:Death .
+         ?death iisgv:deceased ?deceased .
+         ?death bio:date ?date .
+         BIND((month(?date)) as ?month)
+         BIND(year(?date) as ?year) 
+       }
+       
+ ORDER BY ASC (?month) ]]></ds:Block>
         <ds:Block xml:id="b8" type="text" mime="text/markdown"> Linking the Amsterdam Codes in our
             dataset to those in [Gemeentegeschiedenis](https://www.gemeentegeschiedenis.nl/), as
             above, allows to map the spatial distribution of the epidemic. We compared total deaths
@@ -175,7 +228,7 @@
                 <dct:title>Social distribution of the flu</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <ds:title-prologue ds:type="template"># III. {$ds-Metadata/dct:title}</ds:title-prologue>
+                <ds:title-prologue type="template"># III. {$ds-Metadata/dct:title}</ds:title-prologue>
             </ds:Cues> In contrast to many other flu outbreaks, it [has been
             demonstrated](https://wwwnc.cdc.gov/eid/article/12/1/05-0979-f2) that the 1918-19
             epidemic was deadly for young adults in particular. We can use the age at death to
@@ -330,7 +383,7 @@
                 <dct:title>Conclusion</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <ds:title-prologue ds:type="template"># {$ds-Metadata/dct:title}</ds:title-prologue>
+                <ds:title-prologue type="template"># {$ds-Metadata/dct:title}</ds:title-prologue>
             </ds:Cues> By using Linked Data to connect Dutch death certificates to other datasets,
             such as Gemeentegeschiedenis and HISCO, we can for the first time attempt an
             encompassing study into the 1918-19 epidemic. Our, still preliminary, results suggest
