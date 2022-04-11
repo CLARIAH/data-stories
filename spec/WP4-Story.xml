@@ -198,31 +198,49 @@ SELECT ?month (sum(if(?year = "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1,
             <ds:Cues>
                 <wp4:data-output>table</wp4:data-output>
                 <wp4:data-output-config ds:type="json">{"pageSize":10}</wp4:data-output-config>
-            </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
-            &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
-            &lt;https://iisg.amsterdam/openarchdeaths1910_1920/vocab/> PREFIX iisgv2:
-            &lt;https://iisg.amsterdam/openarchdeath/vocab/> PREFIX gg:
-            &lt;http://www.gemeentegeschiedenis.nl/gg-schema#> PREFIX geo:
-            &lt;http://www.opengis.net/ont/geosparql#> PREFIX bio:
-            &lt;http://purl.org/vocab/bio/0.1/> PREFIX bif:
-            &lt;http://www.openlinksw.com/schemas/bif#> SELECT ?gg_gemeente ?mean ?1918
-            ?excess_death_rate WHERE { FILTER(?mean >1) # to avoid 'division by 0' error
-            FILTER(?1918 >1) FILTER(?month = "11"^^xsd:integer) { select ?amco ?wkt ?gg_gemeente
-            ?month (sum(if(?year = "1918"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as
-            ?1918) (sum(if(?year = "1910"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as
-            ?1910) (sum(if(?year = "1911"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as
-            ?1911) (sum(if(?year = "1912"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as
-            ?1912) (sum(if(?year = "1913"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as
-            ?1913) (sum(if(?year = "1914"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as
-            ?1914) (sum(if(?year = "1915"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as
-            ?1915) (sum(if(?year = "1916"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as
-            ?1916) (sum(if(?year = "1917"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as
-            ?1917) { ?death a bio:Death . ?death iisgv:deceased ?deceased . ?death bio:date ?date .
-            ?death iisgv:event_location ?gemeente . ?gemeente gg:amsterdamCode ?amco . ?amco
-            gg:identifies ?gg_gemeente . BIND(year(?date) as ?year) BIND(month(?date) as ?month) }}
-            BIND(xsd:float(?1910+?1911+?1912+?1913+?1914+?1915+?1916+?1917)/8 as ?mean)
-            BIND(xsd:float(?1918/?mean) as ?excess_death_rate) } ORDER BY DESC (?excess_death_rate) </ds:Block>
+            </ds:Cues><![CDATA[
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX iisgv:  <https://iisg.amsterdam/openarchdeaths1910_1920/vocab/> 
+PREFIX iisgv2: <https://iisg.amsterdam/openarchdeath/vocab/> 
+PREFIX gg:     <http://www.gemeentegeschiedenis.nl/gg-schema#> 
+PREFIX geo:    <http://www.opengis.net/ont/geosparql#> 
+PREFIX bio:    <http://purl.org/vocab/bio/0.1/> 
+PREFIX bif:     <http://www.openlinksw.com/schemas/bif#>
+
+SELECT ?gg_gemeente ?mean ?1918 ?excess_death_rate
+
+ WHERE {
+   FILTER(?mean >1) # to avoid 'division by 0' error
+   FILTER(?1918 >1) FILTER(?month = "11"^^xsd:integer) {
+     select ?amco ?wkt ?gg_gemeente ?month 
+     (sum(if(?year = "1918"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1918)
+     (sum(if(?year = "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910)
+     (sum(if(?year = "1911"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1911)
+     (sum(if(?year = "1912"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1912)
+     (sum(if(?year = "1913"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1913)
+     (sum(if(?year = "1914"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1914)
+     (sum(if(?year = "1915"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1915)
+     (sum(if(?year = "1916"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1916)
+     (sum(if(?year = "1917"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1917)
+     
+     { ?death a bio:Death .
+       ?death iisgv:deceased ?deceased .
+       ?death bio:date ?date .
+       ?death iisgv:event_location ?gemeente .
+       ?gemeente gg:amsterdamCode ?amco .
+       ?amco gg:identifies ?gg_gemeente .
+       BIND(year(?date) as ?year)
+       BIND(month(?date) as ?month)
+     }
+   }
+   BIND(xsd:float(?1910+?1911+?1912+?1913+?1914+?1915+?1916+?1917)/8 as ?mean)
+   BIND(xsd:float(?1918/?mean) as ?excess_death_rate) 
+ }
+ 
+ ORDER BY DESC (?excess_death_rate) ]]></ds:Block>
         <ds:Block xml:id="b12" type="text" mime="text/markdown">
             <ds:Metadata>
                 <dct:title>Social distribution of the flu</dct:title>
@@ -243,44 +261,103 @@ SELECT ?month (sum(if(?year = "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1,
         <ds:Block xml:id="b13" type="query" mime="sparql">
             <ds:Cues>
                 <wp4:data-output>gchart</wp4:data-output>
-                <wp4:data-output-config ds:type="json">{ "chartConfig": { "options": { "hAxis":
-                    { "useFormatFromData": true, "viewWindow": { "max": null, "min": null },
-                    "minValue": null, "maxValue": null, "title": "Age" },
-                    "legacyScatterChartLabels": true, "tooltip": {"isHtml": true}, "vAxes": [ {
-                    "useFormatFromData": true, "viewWindow": { "max": null, "min": null },
-                    "minValue": null, "maxValue": null, "title": "%" }, { "useFormatFromData": true,
-                    "viewWindow": { "max": null, "min": null }, "minValue": null, "maxValue": null }
-                    ], "curveType": "", "booleanRole": "certainty", "lineWidth": 2, "legend":
-                    "right", "width": 600, "height": 371, "useFirstColumnAsDomain": true }, "state":
-                    {}, "view": { "columns": null, "rows": null }, "isDefaultVisualization": false,
-                    "chartType": "LineChart" } }</wp4:data-output-config>
-            </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
-            &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
-            &lt;https://iisg.amsterdam/openarchdeaths1910_1920/vocab/> PREFIX iisgv2:
-            &lt;https://iisg.amsterdam/openarchdeath/vocab/> PREFIX gg:
-            &lt;http://www.gemeentegeschiedenis.nl/gg-schema#> PREFIX geo:
-            &lt;http://www.opengis.net/ont/geosparql#> PREFIX bio:
-            &lt;http://purl.org/vocab/bio/0.1/> SELECT ?age (?1910/xsd:decimal(?total_1910)*100 as
-            ?share_1910) (?november_1918/xsd:decimal(?november_1918_total)*100 as
-            ?share_november_1918) (?winter_1919/xsd:decimal(?winter_1919_total)*100 as
-            ?share_winter_1919) WHERE { { select ?total_1910 ?age ?november_1918_total
-            ?winter_1919_total (sum(if(?year = "1918"^^&lt;http://www.w3.org/2001/XMLSchema#int>
-            &amp;&amp; ?month = 11, 1, 0)) as ?november_1918) (sum(if(?year =
-            "1910"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910) (sum(if(?year =
-            "1919"^^&lt;http://www.w3.org/2001/XMLSchema#int> &amp;&amp; ?month >= 3, 1, 0)) as
-            ?winter_1919) { ?death a bio:Death . ?death iisgv:deceased ?deceased . # ?deceased
-            schema:gender "m" . ?deceased iisgv:ageYears ?age. ?death bio:date ?date .
-            BIND(year(?date) as ?year) BIND(month(?date) as ?month) FILTER(?age > 0) # excluded
-            because there may still be an issue with age=0 { select (sum(if(?year =
-            "1910"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?total_1910) (sum(if(?year
-            = "1918"^^&lt;http://www.w3.org/2001/XMLSchema#int> &amp;&amp; ?month = 11, 1, 0)) as
-            ?november_1918_total) (sum(if(?year = "1919"^^&lt;http://www.w3.org/2001/XMLSchema#int>
-            &amp;&amp; ?month >= 3, 1, 0)) as ?winter_1919_total) { ?death a bio:Death . ?death
-            iisgv:deceased ?deceased . #?deceased schema:gender "m" . ?deceased iisgv:ageYears ?age.
-            ?death bio:date ?date . BIND(year(?date) as ?year) BIND(month(?date) as ?month)
-            FILTER(?age > 0) # excluded because there may still be a slight issue with age=0 }} } }}
-            ORDER BY ASC (?age) </ds:Block>
+                <wp4:data-output-config ds:type="json"><![CDATA[{
+    "chartConfig": {
+        "options": {
+            "hAxis": {
+                "useFormatFromData": true,
+                "viewWindow": {
+                    "max": null,
+                    "min": null
+                },
+                "minValue": null,
+                "maxValue": null,
+                "title": "Age"
+            },
+            "legacyScatterChartLabels": true,
+            "tooltip": {"isHtml": true},
+            "vAxes": [
+                {
+                    "useFormatFromData": true,
+                    "viewWindow": {
+                        "max": null,
+                        "min": null
+                    },
+                    "minValue": null,
+                    "maxValue": null,
+                    "title": "%"
+                },
+                {
+                    "useFormatFromData": true,
+                    "viewWindow": {
+                        "max": null,
+                        "min": null
+                    },
+                    "minValue": null,
+                    "maxValue": null
+                }
+            ],
+            "curveType": "",
+            "booleanRole": "certainty",
+            "lineWidth": 2,
+            "legend": "right",
+            "width": 600,
+            "height": 371,
+            "useFirstColumnAsDomain": true
+        },
+        "state": {},
+        "view": {
+            "columns": null,
+            "rows": null
+        },
+        "isDefaultVisualization": false,
+        "chartType": "LineChart"
+    }
+}]]></wp4:data-output-config>
+            </ds:Cues><![CDATA[
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX schema: <http://schema.org/>
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX iisgv:  <https://iisg.amsterdam/openarchdeaths1910_1920/vocab/>
+PREFIX iisgv2: <https://iisg.amsterdam/openarchdeath/vocab/>
+PREFIX gg:     <http://www.gemeentegeschiedenis.nl/gg-schema#>
+PREFIX geo:    <http://www.opengis.net/ont/geosparql#>
+PREFIX bio:    <http://purl.org/vocab/bio/0.1/>
+
+SELECT ?age (?1910/xsd:decimal(?total_1910)*100 as?share_1910)
+            (?november_1918/xsd:decimal(?november_1918_total)*100 as ?share_november_1918)
+            (?winter_1919/xsd:decimal(?winter_1919_total)*100 as ?share_winter_1919)
+
+ WHERE { { select ?total_1910 ?age ?november_1918_total
+                  ?winter_1919_total
+                  (sum(if(?year = "1918"^^<http://www.w3.org/2001/XMLSchema#int> && ?month = 11, 1, 0)) as ?november_1918)
+                  (sum(if(?year = "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910)
+                  (sum(if(?year = "1919"^^<http://www.w3.org/2001/XMLSchema#int> && ?month >= 3, 1, 0)) as ?winter_1919)
+                  { ?death a bio:Death . ?death iisgv:deceased ?deceased . 
+                    # ?deceased schema:gender "m" .
+                    ?deceased iisgv:ageYears ?age.
+                    ?death bio:date ?date .
+                    BIND(year(?date) as ?year)
+                    BIND(month(?date) as ?month)
+                    FILTER(?age > 0) # excluded because there may still be an issue with age=0
+                    { select (sum(if(?year = "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?total_1910)
+                           (sum(if(?year = "1918"^^<http://www.w3.org/2001/XMLSchema#int> && ?month = 11, 1, 0)) as ?november_1918_total)
+                           (sum(if(?year = "1919"^^<http://www.w3.org/2001/XMLSchema#int> && ?month >= 3, 1, 0)) as ?winter_1919_total)
+                           { ?death a bio:Death .
+                             ?death iisgv:deceased ?deceased .
+                             #?deceased schema:gender "m" .
+                             ?deceased iisgv:ageYears ?age.
+                             ?death bio:date ?date .
+                             BIND(year(?date) as ?year) 
+                             BIND(month(?date) as ?month)
+                             FILTER(?age > 0) # excluded because there may still be a slight issue with age=0 
+                           }
+                    }
+                  
+                  }
+ }}
+ ORDER BY ASC (?age) ]]></ds:Block>
         <ds:Block xml:id="b14" type="text" mime="text/markdown">Last, we examine whether people from
             certain occupations experienced higher death rates than usual. This could suggest they
             had a higher exposure to the virus. To do so, occupational titles of the deceased are
@@ -307,32 +384,32 @@ SELECT ?month (sum(if(?year = "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1,
             <ds:Cues>
                 <wp4:data-output>table</wp4:data-output>
                 <wp4:data-output-config ds:type="json">{"pageSize":10}</wp4:data-output-config>
-            </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
-            &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
-            &lt;https://iisg.amsterdam/openarchdeaths1910_1920/vocab/> PREFIX iisgv2:
-            &lt;https://iisg.amsterdam/openarchdeath/vocab/> PREFIX gg:
-            &lt;http://www.gemeentegeschiedenis.nl/gg-schema#> PREFIX geo:
-            &lt;http://www.opengis.net/ont/geosparql#> PREFIX bio:
-            &lt;http://purl.org/vocab/bio/0.1/> PREFIX bif:
-            &lt;http://www.openlinksw.com/schemas/bif#> SELECT ?unit_group ?occupational_group ?mean
+            </ds:Cues><![CDATA[ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX schema:
+            <http://schema.org/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
+            <https://iisg.amsterdam/openarchdeaths1910_1920/vocab/> PREFIX iisgv2:
+            <https://iisg.amsterdam/openarchdeath/vocab/> PREFIX gg:
+            <http://www.gemeentegeschiedenis.nl/gg-schema#> PREFIX geo:
+            <http://www.opengis.net/ont/geosparql#> PREFIX bio:
+            <http://purl.org/vocab/bio/0.1/> PREFIX bif:
+            <http://www.openlinksw.com/schemas/bif#> SELECT ?unit_group ?occupational_group ?mean
             ?1918 ?excess WHERE { FILTER(?mean >5) # to avoid 'division by 0' error FILTER(?1918 >0)
             { select ?unit_group ?occupational_group (sum(if(?year =
-            "1918"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1918) (sum(if(?year =
-            "1910"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910) (sum(if(?year =
-            "1911"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1911) (sum(if(?year =
-            "1912"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1912) (sum(if(?year =
-            "1913"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1913) (sum(if(?year =
-            "1914"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1914) (sum(if(?year =
-            "1915"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1915) (sum(if(?year =
-            "1916"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1916) (sum(if(?year =
-            "1917"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1917) { ?death a bio:Death
+            "1918"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1918) (sum(if(?year =
+            "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910) (sum(if(?year =
+            "1911"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1911) (sum(if(?year =
+            "1912"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1912) (sum(if(?year =
+            "1913"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1913) (sum(if(?year =
+            "1914"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1914) (sum(if(?year =
+            "1915"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1915) (sum(if(?year =
+            "1916"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1916) (sum(if(?year =
+            "1917"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1917) { ?death a bio:Death
             . ?death iisgv:deceased ?deceased . ?deceased iisgv:ageYears ?age . ?deceased
             schema:hasOccupation ?occ. ?occ schema:categoryCode ?hisco . ?hisco rdfs:subClassOf
             ?unit_group . ?unit_group schema:name ?occupational_group . ?death bio:date ?date .
-            BIND(year(?date) as ?year) FILTER(?age >= 18 &amp;&amp; ?age &lt;= 45) }}
+            BIND(year(?date) as ?year) FILTER(?age >= 18 &amp;&amp; ?age <= 45) }}
             BIND(xsd:float(?1910+?1911+?1912+?1913+?1914+?1915+?1916+?1917)/8 as ?mean)
-            BIND(xsd:decimal(?1918/?mean) as ?excess) } ORDER BY DESC (?excess) </ds:Block>
+            BIND(xsd:decimal(?1918/?mean) as ?excess) } ORDER BY DESC (?excess) ]]></ds:Block>
         <ds:Block xml:id="b16" type="query" mime="sparql">
             <ds:Metadata>
                 <dct:title>Correlation between mean excess mortality (ages 18-45) and social class
@@ -340,44 +417,98 @@ SELECT ?month (sum(if(?year = "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1,
             </ds:Metadata>
             <ds:Cues>
                 <wp4:data-output>gchart</wp4:data-output>
-                <wp4:data-output-config ds:type="json"> { "chartConfig": { "options": {
-                    "hAxis": { "useFormatFromData": true, "viewWindow": { "max": null, "min": 40 },
-                    "minValue": 40, "maxValue": null, "title": "Hiscam", "viewWindowMode":
-                    "explicit" }, "legacyScatterChartLabels": true, "tooltip": { "isHtml": true,
-                    "ignoreBounds": false }, "vAxes": [ { "useFormatFromData": true, "viewWindow": {
-                    "max": null, "min": null }, "minValue": null, "maxValue": null, "title": "excess
-                    death rate" }, { "useFormatFromData": true, "viewWindow": { "max": null, "min":
-                    null }, "minValue": null, "maxValue": null } ], "lineWidth": 0, "booleanRole":
-                    "certainty", "pointSize": 7, "legend": "right", "width": 600, "height": 371,
-                    "trendlines": { "0": { "type": "linear", "pointSize": 0, "visibleInLegend":
-                    true, "lineWidth": 2, "opacity": 0.4, "labelInLegend": "Trendline for Data
-                    series 1", "showR2": true, "degree": 2 } } }, "state": {}, "view": { "columns":
-                    null, "rows": null }, "isDefaultVisualization": false, "chartType":
-                    "ScatterChart" } } </wp4:data-output-config>
-            </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
-            &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
-            &lt;https://iisg.amsterdam/openarchdeaths1910_1920/vocab/> PREFIX iisgv2:
-            &lt;https://iisg.amsterdam/openarchdeath/vocab/> PREFIX gg:
-            &lt;http://www.gemeentegeschiedenis.nl/gg-schema#> PREFIX geo:
-            &lt;http://www.opengis.net/ont/geosparql#> PREFIX bio:
-            &lt;http://purl.org/vocab/bio/0.1/> PREFIX bif:
-            &lt;http://www.openlinksw.com/schemas/bif#> SELECT ?hiscam ?excess WHERE { FILTER(?mean
+                <wp4:data-output-config ds:type="json"><![CDATA[{
+    "chartConfig": {
+        "options": {
+            "hAxis": {
+                "useFormatFromData": true,
+                "viewWindow": {
+                    "max": null,
+                    "min": 40
+                },
+                "minValue": 40,
+                "maxValue": null,
+                "title": "Hiscam",
+                "viewWindowMode": "explicit"
+            },
+            "legacyScatterChartLabels": true,
+            "tooltip": {
+                "isHtml": true,
+                "ignoreBounds": false
+            },
+            "vAxes": [
+                {
+                    "useFormatFromData": true,
+                    "viewWindow": {
+                        "max": null,
+                        "min": null
+                    },
+                    "minValue": null,
+                    "maxValue": null,
+                    "title": "excess death rate"
+                },
+                {
+                    "useFormatFromData": true,
+                    "viewWindow": {
+                        "max": null,
+                        "min": null
+                    },
+                    "minValue": null,
+                    "maxValue": null
+                }
+            ],
+            "lineWidth": 0,
+            "booleanRole": "certainty",
+            "pointSize": 7,
+            "legend": "right",
+            "width": 600,
+            "height": 371,
+            "trendlines": {
+                "0": {
+                    "type": "linear",
+                    "pointSize": 0,
+                    "visibleInLegend": true,
+                    "lineWidth": 2,
+                    "opacity": 0.4,
+                    "labelInLegend": "Trendline for Data series 1",
+                    "showR2": true,
+                    "degree": 2
+                }
+            }
+        },
+        "state": {},
+        "view": {
+            "columns": null,
+            "rows": null
+        },
+        "isDefaultVisualization": false,
+        "chartType": "ScatterChart"
+    }
+}]]></wp4:data-output-config>
+            </ds:Cues><![CDATA[ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX schema:
+            <http://schema.org/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
+            <https://iisg.amsterdam/openarchdeaths1910_1920/vocab/> PREFIX iisgv2:
+            <https://iisg.amsterdam/openarchdeath/vocab/> PREFIX gg:
+            <http://www.gemeentegeschiedenis.nl/gg-schema#> PREFIX geo:
+            <http://www.opengis.net/ont/geosparql#> PREFIX bio:
+            <http://purl.org/vocab/bio/0.1/> PREFIX bif:
+            <http://www.openlinksw.com/schemas/bif#> SELECT ?hiscam ?excess WHERE { FILTER(?mean
             >2) # to avoid 'division by 0' error FILTER(?1918 >0) { select ?hiscam (sum(if(?year =
-            "1918"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1918) (sum(if(?year =
-            "1910"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910) (sum(if(?year =
-            "1911"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1911) (sum(if(?year =
-            "1912"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1912) (sum(if(?year =
-            "1913"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1913) (sum(if(?year =
-            "1914"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1914) (sum(if(?year =
-            "1915"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1915) (sum(if(?year =
-            "1916"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1916) (sum(if(?year =
-            "1917"^^&lt;http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1917) { ?death a bio:Death
+            "1918"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1918) (sum(if(?year =
+            "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1910) (sum(if(?year =
+            "1911"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1911) (sum(if(?year =
+            "1912"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1912) (sum(if(?year =
+            "1913"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1913) (sum(if(?year =
+            "1914"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1914) (sum(if(?year =
+            "1915"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1915) (sum(if(?year =
+            "1916"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1916) (sum(if(?year =
+            "1917"^^<http://www.w3.org/2001/XMLSchema#int>, 1, 0)) as ?1917) { ?death a bio:Death
             . ?death iisgv:deceased ?deceased . ?deceased iisgv:ageYears ?age . ?deceased
             schema:hasOccupation ?occ. ?occ iisgv2:hiscam_nl ?hiscam . ?death bio:date ?date .
-            BIND(year(?date) as ?year) FILTER(?age >= 18 &amp;&amp; ?age &lt;= 45) FILTER(?hiscam
+            BIND(year(?date) as ?year) FILTER(?age >= 18 &amp;&amp; ?age <= 45) FILTER(?hiscam
             >39) }} BIND(xsd:float(?1910+?1911+?1912+?1913+?1914+?1915+?1916+?1917)/8 as ?mean)
-            BIND(xsd:decimal(?1918/?mean) as ?excess) } ORDER BY DESC (?excess) </ds:Block>
+            BIND(xsd:decimal(?1918/?mean) as ?excess) } ORDER BY DESC (?excess) ]]></ds:Block>
         <ds:Block xml:id="b17" type="text" mime="text/markdown">
             <ds:Metadata>
                 <dct:title>Conclusion</dct:title>
