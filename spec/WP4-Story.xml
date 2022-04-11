@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ds:DataStory xmlns:ds="http://example.com/ds/" xmlns:dct="http://purl.org/dc/terms/" xml:lang="en">
+<ds:DataStory xmlns:ds="http://example.com/ds/" xmlns:dct="http://purl.org/dc/terms/" xmlns:wp4="https://github.com/CLARIAH/wp4-stories/ns#" xml:lang="en">
     <ds:Metadata>
         <dct:title>The 1918-19 flu epidemic in The Netherlands</dct:title>
         <dct:creator>Thomas de Groot</dct:creator>
@@ -14,7 +14,7 @@
                 <dct:title>The dataset</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <title-prologue ds:type="template"># I. {$ds-Metadata/dct:title}</title-prologue>
+                <ds:title-prologue ds:type="template"># I. {$ds-Metadata/dct:title}</ds:title-prologue>
             </ds:Cues> Thanks to the indexation efforts of archives and the [LINKS
             project](https://iisg.amsterdam/en/hsn/projects/links), large parts of the Dutch civil
             registry (_'Burgerlijke Stand'_) are now becoming available for historians. The death
@@ -65,7 +65,7 @@
                     municipality:</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <data-output>geo</data-output>
+                <wp4:data-output>geo</wp4:data-output>
             </ds:Cues>
         </ds:Block>
         <ds:Block xml:id="b6" type="text" mime="text/markdown">
@@ -84,8 +84,8 @@
                 <dct:title>Total deaths in The Netherlands by month:</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <data-output>gchart</data-output>
-                <data-output-config ds:type="json"> { "chartConfig": { "options": {
+                <wp4:data-output>gchart</wp4:data-output>
+                <wp4:data-output-config ds:type="json"> { "chartConfig": { "options": {
                     "hAxis": { "useFormatFromData": true, "viewWindow": { "max": null, "min": null
                     }, "minValue": null, "maxValue": null }, "legacyScatterChartLabels": true,
                     "tooltip": { "isHtml": true, "ignoreBounds": true }, "vAxes": [ {
@@ -95,7 +95,7 @@
                     "curveType": "", "booleanRole": "certainty", "lineWidth": 2, "legend": "right",
                     "width": "100%", "height": "100%", "useFirstColumnAsDomain": true }, "state":
                     {}, "view": { "columns": null, "rows": null }, "isDefaultVisualization": false,
-                    "chartType": "LineChart" } } </data-output-config>
+                    "chartType": "LineChart" } } </wp4:data-output-config>
             </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
             &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
@@ -126,7 +126,7 @@
                 <dct:title>Excess mortality in 1918:</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <data-output>geo</data-output>
+                <wp4:data-output>geo</wp4:data-output>
             </ds:Cues>
         </ds:Block>
         <ds:Block xml:id="b10" type="text" mime="text/markdown"> The next query zooms in on the
@@ -143,8 +143,8 @@
                 <dct:title>Excess mortality in November 1918 per municipality:</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <data-output>table</data-output>
-                <data-output-config ds:type="json">{"pageSize":10}</data-output-config>
+                <wp4:data-output>table</wp4:data-output>
+                <dwp4:ata-output-config ds:type="json">{"pageSize":10}</dwp4:ata-output-config>
             </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
             &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
@@ -175,7 +175,7 @@
                 <dct:title>Social distribution of the flu</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <title-prologue ds:type="template"># III. {$ds-Metadata/dct:title}</title-prologue>
+                <ds:title-prologue ds:type="template"># III. {$ds-Metadata/dct:title}</ds:title-prologue>
             </ds:Cues> In contrast to many other flu outbreaks, it [has been
             demonstrated](https://wwwnc.cdc.gov/eid/article/12/1/05-0979-f2) that the 1918-19
             epidemic was deadly for young adults in particular. We can use the age at death to
@@ -189,8 +189,8 @@
             numbers. </ds:Block>
         <ds:Block xml:id="b13" type="query" mime="sparql">
             <ds:Cues>
-                <data-output>gchart</data-output>
-                <data-output-config ds:type="json">{ "chartConfig": { "options": { "hAxis":
+                <wp4:data-output>gchart</wp4:data-output>
+                <wp4:data-output-config ds:type="json">{ "chartConfig": { "options": { "hAxis":
                     { "useFormatFromData": true, "viewWindow": { "max": null, "min": null },
                     "minValue": null, "maxValue": null, "title": "Age" },
                     "legacyScatterChartLabels": true, "tooltip": {"isHtml": true}, "vAxes": [ {
@@ -200,7 +200,7 @@
                     ], "curveType": "", "booleanRole": "certainty", "lineWidth": 2, "legend":
                     "right", "width": 600, "height": 371, "useFirstColumnAsDomain": true }, "state":
                     {}, "view": { "columns": null, "rows": null }, "isDefaultVisualization": false,
-                    "chartType": "LineChart" } }</data-output-config>
+                    "chartType": "LineChart" } }</wp4:data-output-config>
             </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
             &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
@@ -252,8 +252,8 @@
                     1918:</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <data-output>table</data-output>
-                <data-output-config ds:type="json">{"pageSize":10}</data-output-config>
+                <wp4:data-output>table</wp4:data-output>
+                <wp4:data-output-config ds:type="json">{"pageSize":10}</wp4:data-output-config>
             </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
             &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
@@ -286,8 +286,8 @@
                     :</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <data-output>gchart</data-output>
-                <data-output-config ds:type="json"> { "chartConfig": { "options": {
+                <wp4:data-output>gchart</wp4:data-output>
+                <wp4:data-output-config ds:type="json"> { "chartConfig": { "options": {
                     "hAxis": { "useFormatFromData": true, "viewWindow": { "max": null, "min": 40 },
                     "minValue": 40, "maxValue": null, "title": "Hiscam", "viewWindowMode":
                     "explicit" }, "legacyScatterChartLabels": true, "tooltip": { "isHtml": true,
@@ -300,7 +300,7 @@
                     true, "lineWidth": 2, "opacity": 0.4, "labelInLegend": "Trendline for Data
                     series 1", "showR2": true, "degree": 2 } } }, "state": {}, "view": { "columns":
                     null, "rows": null }, "isDefaultVisualization": false, "chartType":
-                    "ScatterChart" } } </data-output-config>
+                    "ScatterChart" } } </wp4:data-output-config>
             </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
             &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
@@ -330,7 +330,7 @@
                 <dct:title>Conclusion</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <title-prologue ds:type="template"># {$ds-Metadata/dct:title}</title-prologue>
+                <ds:title-prologue ds:type="template"># {$ds-Metadata/dct:title}</ds:title-prologue>
             </ds:Cues> By using Linked Data to connect Dutch death certificates to other datasets,
             such as Gemeentegeschiedenis and HISCO, we can for the first time attempt an
             encompassing study into the 1918-19 epidemic. Our, still preliminary, results suggest
