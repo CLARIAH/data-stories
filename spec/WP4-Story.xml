@@ -5,8 +5,8 @@
         <dct:creator>Thomas de Groot</dct:creator>
         <dct:creator>Wouter Beek</dct:creator>
         <dct:license>http://creativecommons.org/licenses/by-sa/4.0/</dct:license>
-        <LandingPage>https://stories.datalegend.net/spanishFluNetherlands/</LandingPage>
-        <Endpoint>https://druid.datalegend.net/dataLegend/deaths-1910-1920/sparql/deaths-1910-1920</Endpoint>
+        <ds:LandingPage>https://stories.datalegend.net/spanishFluNetherlands/</ds:LandingPage>
+        <ds:Endpoint>https://druid.datalegend.net/dataLegend/deaths-1910-1920/sparql/deaths-1910-1920</ds:Endpoint>
     </ds:Metadata>
     <ds:Story>
         <ds:Block xml:id="b1" type="text" mime="text/markdown">
@@ -14,7 +14,7 @@
                 <dct:title>The dataset</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <title-prologue># I. {$ds-Metadata/dct:title}</title-prologue>
+                <title-prologue ds:type="template"># I. {$ds-Metadata/dct:title}</title-prologue>
             </ds:Cues> Thanks to the indexation efforts of archives and the [LINKS
             project](https://iisg.amsterdam/en/hsn/projects/links), large parts of the Dutch civil
             registry (_'Burgerlijke Stand'_) are now becoming available for historians. The death
@@ -85,7 +85,7 @@
             </ds:Metadata>
             <ds:Cues>
                 <data-output>gchart</data-output>
-                <data-output-config mime="application/json"> { "chartConfig": { "options": {
+                <data-output-config ds:type="json"> { "chartConfig": { "options": {
                     "hAxis": { "useFormatFromData": true, "viewWindow": { "max": null, "min": null
                     }, "minValue": null, "maxValue": null }, "legacyScatterChartLabels": true,
                     "tooltip": { "isHtml": true, "ignoreBounds": true }, "vAxes": [ {
@@ -144,7 +144,7 @@
             </ds:Metadata>
             <ds:Cues>
                 <data-output>table</data-output>
-                <data-output-config mime="application/json">{"pageSize":10}</data-output-config>
+                <data-output-config ds:type="json">{"pageSize":10}</data-output-config>
             </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
             &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
@@ -175,7 +175,7 @@
                 <dct:title>Social distribution of the flu</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <title-prologue># III. {$ds-Metadata/dct:title}</title-prologue>
+                <title-prologue ds:type="template"># III. {$ds-Metadata/dct:title}</title-prologue>
             </ds:Cues> In contrast to many other flu outbreaks, it [has been
             demonstrated](https://wwwnc.cdc.gov/eid/article/12/1/05-0979-f2) that the 1918-19
             epidemic was deadly for young adults in particular. We can use the age at death to
@@ -190,7 +190,7 @@
         <ds:Block xml:id="b13" type="query" mime="sparql">
             <ds:Cues>
                 <data-output>gchart</data-output>
-                <data-output-config mime="application/json">{ "chartConfig": { "options": { "hAxis":
+                <data-output-config ds:type="json">{ "chartConfig": { "options": { "hAxis":
                     { "useFormatFromData": true, "viewWindow": { "max": null, "min": null },
                     "minValue": null, "maxValue": null, "title": "Age" },
                     "legacyScatterChartLabels": true, "tooltip": {"isHtml": true}, "vAxes": [ {
@@ -253,7 +253,7 @@
             </ds:Metadata>
             <ds:Cues>
                 <data-output>table</data-output>
-                <data-output-config mime="application/json">{"pageSize":10}</data-output-config>
+                <data-output-config ds:type="json">{"pageSize":10}</data-output-config>
             </ds:Cues> PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#> PREFIX schema:
             &lt;http://schema.org/> PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#> PREFIX iisgv:
@@ -287,7 +287,7 @@
             </ds:Metadata>
             <ds:Cues>
                 <data-output>gchart</data-output>
-                <data-output-config mime="application/json"> { "chartConfig": { "options": {
+                <data-output-config ds:type="json"> { "chartConfig": { "options": {
                     "hAxis": { "useFormatFromData": true, "viewWindow": { "max": null, "min": 40 },
                     "minValue": 40, "maxValue": null, "title": "Hiscam", "viewWindowMode":
                     "explicit" }, "legacyScatterChartLabels": true, "tooltip": { "isHtml": true,
@@ -330,7 +330,7 @@
                 <dct:title>Conclusion</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <title-prologue># </title-prologue>
+                <title-prologue ds:type="template"># {$ds-Metadata/dct:title}</title-prologue>
             </ds:Cues> By using Linked Data to connect Dutch death certificates to other datasets,
             such as Gemeentegeschiedenis and HISCO, we can for the first time attempt an
             encompassing study into the 1918-19 epidemic. Our, still preliminary, results suggest
