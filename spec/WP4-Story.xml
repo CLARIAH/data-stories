@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="schema/datastory.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <ds:DataStory xmlns:ds="http://example.com/ds/" xmlns:dct="http://purl.org/dc/terms/" xmlns:wp4="https://github.com/CLARIAH/wp4-stories/ns#" xml:lang="en">
     <ds:Metadata>
         <dct:title>The 1918-19 flu epidemic in The Netherlands</dct:title>
@@ -67,7 +68,7 @@
             complete Linked Dataset and the related metadata scheme can be explored at
             [Druid](https://druid.datalegend.net/dataLegend/deaths-1910-1920/) The table below
             demonstrates the success of the standardization efforts, presented as Linked Data. </ds:Block>
-        <ds:Block xml:id="b2" type="query" mime="sparql" href="queries/standardization_share.rq">
+        <ds:Block xml:id="b2" type="query" mime="application/sparql-query" href="queries/standardization_share.rq">
             <ds:Metadata>
                 <dct:title>Share of death certificates with standardized places of death and
                     occupations:</dct:title>
@@ -89,13 +90,13 @@
             the deceased are not available for all regions. Archives from the provinces of Drenthe,
             Gelderland, and Zeeland are, regrettably, the only ones to have structurally indexed all
             occupations of the deceased for this period. </ds:Block>
-        <ds:Block xml:id="b5" type="query" mime="sparql" href="queries/occupation_share.rq">
+        <ds:Block xml:id="b5" type="query" mime="application/sparql-query" href="queries/occupation_share.rq">
             <ds:Metadata>
                 <dct:title>Share of known occupations of the deceased, aged eighteen and over, by
                     municipality:</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <wp4:data-output>geo</wp4:data-output>
+                <ds:visualisation>geo</ds:visualisation>
             </ds:Cues>
         </ds:Block>
         <ds:Block xml:id="b6" type="text" mime="text/markdown">
@@ -103,18 +104,18 @@
                 <dct:title>When and where did the epidemic hit?</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <title-prologue># II. {$ds-Metadata/dct:title}</title-prologue>
+                <ds:title-prologue type="template"># II. {$ds-Metadata/dct:title}</ds:title-prologue>
             </ds:Cues> The table above demonstrated that the flu did most of its damage in 1918,
             with much more deaths than surrounding years. As with most flu epidemics, seasonality
             played a role as well. Deaths surged in the fall in particular, with November 1918 being
             the most deadly month. But also in January through March 1919 many people seem to have
             succumbed to the flu when compared to a more ordinary year such as 1910. </ds:Block>
-        <ds:Block xml:id="b7" type="query" mime="sparql">
+        <ds:Block xml:id="b7" type="query" mime="application/sparql-query">
             <ds:Metadata>
                 <dct:title>Total deaths in The Netherlands by month:</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <wp4:data-output>gchart</wp4:data-output>
+                <ds:visualisation>gchart</ds:visualisation>
                 <wp4:data-output-config ds:type="json"><![CDATA[{
     "chartConfig": {
         "options": {
@@ -204,12 +205,12 @@ SELECT ?month (sum(if(?year = "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1,
             North-Brabant and North-Holland. The Achterhoek, the south west of North-Brabant and
             Schouwen-Duiveland seem to have been affected relatively less severe. By hovering over
             the map, the excess death rate and the name of the municipality will show. </ds:Block>
-        <ds:Block xml:id="b9" type="query" mime="sparql" href="queries/deaths_spatial.rq">
+        <ds:Block xml:id="b9" type="query" mime="application/sparql-query" href="queries/deaths_spatial.rq">
             <ds:Metadata>
                 <dct:title>Excess mortality in 1918:</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <wp4:data-output>geo</wp4:data-output>
+                <ds:visualisation>geo</ds:visualisation>
             </ds:Cues>
         </ds:Block>
         <ds:Block xml:id="b10" type="text" mime="text/markdown"> The next query zooms in on the
@@ -221,12 +222,12 @@ SELECT ?month (sum(if(?year = "1910"^^<http://www.w3.org/2001/XMLSchema#int>, 1,
             can be browsed by entering their name in the searchbar 'Filter query results' just above
             the table at the left-hand side, after clicking the blue upward-facing arrow. To put the
             municipal rates into context: the overall excess death rate in 1918 was about 1.41. </ds:Block>
-        <ds:Block xml:id="b11" type="query" mime="sparql">
+        <ds:Block xml:id="b11" type="query" mime="application/sparql-query">
             <ds:Metadata>
                 <dct:title>Excess mortality in November 1918 per municipality:</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <wp4:data-output>table</wp4:data-output>
+                <ds:visualisation>table</ds:visualisation>
                 <wp4:data-output-config ds:type="json">{"pageSize":10}</wp4:data-output-config>
             </ds:Cues><![CDATA[
 PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
@@ -288,9 +289,9 @@ SELECT ?gg_gemeente ?mean ?1918 ?excess_death_rate
             overcame the first wave had acquired immunity by 1919, but that does not explain why the
             elderly, who had not been at much risk in 1918, were now affected in relatively large
             numbers. </ds:Block>
-        <ds:Block xml:id="b13" type="query" mime="sparql">
+        <ds:Block xml:id="b13" type="query" mime="application/sparql-query">
             <ds:Cues>
-                <wp4:data-output>gchart</wp4:data-output>
+                <ds:visualisation>gchart</ds:visualisation>
                 <wp4:data-output-config ds:type="json"><![CDATA[{
     "chartConfig": {
         "options": {
@@ -407,13 +408,13 @@ SELECT ?age (?1910/xsd:decimal(?total_1910)*100 as?share_1910)
             studies](https://academic.oup.com/aje/article/187/12/2568/5060513#126180950), we observe
             no discernable hierarchical relation between social class - measured by HISCAM - and
             excess mortality. </ds:Block>
-        <ds:Block xml:id="b15" type="query" mime="sparql">
+        <ds:Block xml:id="b15" type="query" mime="application/sparql-query">
             <ds:Metadata>
                 <dct:title>Excess mortality of those aged 18-45 per occupational group in
                     1918:</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <wp4:data-output>table</wp4:data-output>
+                <ds:visualisation>table</ds:visualisation>
                 <wp4:data-output-config ds:type="json">{"pageSize":10}</wp4:data-output-config>
             </ds:Cues><![CDATA[
 PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
@@ -455,13 +456,13 @@ SELECT ?unit_group ?occupational_group ?mean ?1918 ?excess
       }
       BIND(xsd:float(?1910+?1911+?1912+?1913+?1914+?1915+?1916+?1917)/8 as ?mean)
       BIND(xsd:decimal(?1918/?mean) as ?excess) } ORDER BY DESC (?excess) ]]></ds:Block>
-        <ds:Block xml:id="b16" type="query" mime="sparql">
+        <ds:Block xml:id="b16" type="query" mime="application/sparql-query">
             <ds:Metadata>
                 <dct:title>Correlation between mean excess mortality (ages 18-45) and social class
                     :</dct:title>
             </ds:Metadata>
             <ds:Cues>
-                <wp4:data-output>gchart</wp4:data-output>
+                <ds:visualisation>gchart</ds:visualisation>
                 <wp4:data-output-config ds:type="json"><![CDATA[{
     "chartConfig": {
         "options": {
@@ -597,10 +598,14 @@ SELECT ?hiscam ?excess
             different generations of the same family. </ds:Block>
     </ds:Story>
     <ds:Data>
-        <ds:Run ref="#all" when="2022-03-16" mime="application/warc" href="flu.warc.gz"/>
-        <ds:Run ref="b2" when="2022-03-30" mime="text/csv" href="data/standardization_share.csv"/>
-        <ds:Run ref="b5" when="2022-03-30" mime="text/csv" href="img/occupation_share-geo.csv"/>
-        <ds:Run ref="b5" when="2022-03-30" mime="image/png" href="img/occupation_share-geo.png"/>
+        <ds:Run when="2022-03-16">
+            <ds:Resource mime="application/warc" href="flu.warc.gz"/>
+        </ds:Run>
+        <ds:Run when="2022-03-30">
+            <ds:Resource ref="b2" mime="text/csv" href="data/standardization_share.csv"/>
+            <ds:Resource ref="b5" mime="text/csv" href="img/occupation_share-geo.csv"/>
+            <ds:Resource ref="b5" mime="image/png" href="img/occupation_share-geo.png"/>
+        </ds:Run>
         <!-- NOTE: point to a file containing (parts of) a run
                    - ref: refer to the block the file captures, use #all when the file contains all the block (TODO, maybe we need @refs="b1 b2 b3" ???-->
     </ds:Data>
