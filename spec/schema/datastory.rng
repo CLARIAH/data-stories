@@ -12,6 +12,9 @@
     <define name="ds.DataStory">
         <element name="ds:DataStory">
             <ref name="ds.Metadata"/>
+            <optional>
+                <ref name="ds.Provenance"/>
+            </optional>
             <ref name="ds.Story"/>
             <optional>
                 <ref name="ds.Data"/>
@@ -191,6 +194,9 @@
                     <zeroOrMore>
                         <element name="dct:valid"><data type="string"/></element>
                     </zeroOrMore>
+                    <zeroOrMore>
+                        <element name="ds:Reviewer"><data type="string"/></element>
+                    </zeroOrMore>
                     <optional>
                         <element name="ds:LandingPage"><data type="anyURI"/></element>
                     </optional>
@@ -202,6 +208,11 @@
         </element>
     </define>
 
+    <define name="ds.Provenance">
+        <element name="ds:Provenance">
+            <text/>
+        </element>
+    </define>
     <define name="ds.Story">
         <element name="ds:Story">
             <oneOrMore>
@@ -227,15 +238,20 @@
                     <choice>
                         <value>text/plain</value>
                         <value>text/markdown</value>
+                        <value>text/html</value>
                         <value>application/xhtml+xml</value>
                         <value>application/sparql-query</value>
-                        <value> </value>
+                        <value>image/gif</value>
+                        <value>image/png</value>
                     </choice>
                 </attribute>
             </optional>
             <interleave>
                 <optional>
                     <ref name="ds.Metadata"/>
+                </optional>
+                <optional>
+                    <ref name="ds.Provenance"/>
                 </optional>
                 <optional>
                     <ref name="ds.Cues"/>
@@ -247,7 +263,12 @@
                 </attribute>
                 <text/>
             </choice>
-            <text/>
+            <oneOrMore>
+                <interleave>
+                    <text/>
+                    <ref name="any"/>
+                </interleave>
+            </oneOrMore>
         </element>
     </define>
     
