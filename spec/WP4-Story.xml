@@ -11,7 +11,6 @@
         <ds:Endpoint>https://druid.datalegend.net/dataLegend/deaths-1910-1920/sparql/deaths-1910-1920</ds:Endpoint>
         <!-- TODO: some more standard DS metadata elements? -->
     </ds:Metadata>
-    <!-- TODO: ds:Provenance -->
     <ds:Story>
         <ds:Block xml:id="b1" type="text" mime="text/markdown">
             <!-- NOTE: block types:
@@ -606,7 +605,5 @@ SELECT ?hiscam ?excess
             <ds:Resource ref="b5" mime="text/csv" href="img/occupation_share-geo.csv"/>
             <ds:Resource ref="b5" mime="image/png" href="img/occupation_share-geo.png"/>
         </ds:Run>
-        <!-- NOTE: point to a file containing (parts of) a run
-                   - ref: refer to the block the file captures, use #all when the file contains all the block (TODO, maybe we need @refs="b1 b2 b3" ???-->
     </ds:Data>
 </ds:DataStory>
