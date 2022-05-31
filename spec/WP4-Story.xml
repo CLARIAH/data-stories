@@ -595,12 +595,15 @@ SELECT ?hiscam ?excess
             trees. In this way it will be possible to take into account household composition and
             genetic traits as well, such as a comparison of mortality between siblings or between
             different generations of the same family. </ds:Block>
+        <!--<ds:Block xml:id="b99" type="code" mime="python" href="../">
+            print("Hello world");
+        </ds:Block>-->
     </ds:Story>
     <ds:Data>
-        <ds:Run when="2022-03-16">
+        <ds:Run when="2022-03-16T15:00:00">
             <ds:Resource mime="application/warc" href="flu.warc.gz"/>
         </ds:Run>
-        <ds:Run when="2022-03-30">
+        <ds:Run when="2022-03-30T12:00:00">
             <ds:Resource ref="b2" mime="text/csv" href="data/standardization_share.csv"/>
             <ds:Resource ref="b5" mime="text/csv" href="img/occupation_share-geo.csv"/>
             <ds:Resource ref="b5" mime="image/png" href="img/occupation_share-geo.png"/>
