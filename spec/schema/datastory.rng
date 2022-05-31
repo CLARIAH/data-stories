@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar 
-    xmlns:ds="http://example.com/ds/"
-    xmlns:dct="http://purl.org/dc/terms/"
+<grammar xmlns:ds="http://example.com/ds/" xmlns:dct="http://purl.org/dc/terms/"
     xmlns="http://relaxng.org/ns/structure/1.0"
     xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <xhtml:title>Data Story specification</xhtml:title>
+    <xhtml:p>
+        DIT IS EEN TEST
+    </xhtml:p>
+    
     <start>
         <ref name="ds.DataStory"/>
     </start>
-    
+
     <define name="ds.DataStory">
         <element name="ds:DataStory">
             <ref name="ds.Metadata"/>
@@ -26,7 +31,7 @@
             </optional>
         </element>
     </define>
-    
+
     <define name="ds.Metadata">
         <element name="ds:Metadata">
             <!-- TODO: @href, @mime -->
@@ -39,169 +44,279 @@
                         </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:accessRights"><data type="string"/></element>
+                        <element name="dct:accessRights">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:accrualMethod"><data type="string"/></element>
+                        <element name="dct:accrualMethod">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:accrualPeriodicity"><data type="string"/></element>
+                        <element name="dct:accrualPeriodicity">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:accrualPolicy"><data type="string"/></element>
+                        <element name="dct:accrualPolicy">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:alternative"><data type="string"/></element>
+                        <element name="dct:alternative">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:audience"><data type="string"/></element>
+                        <element name="dct:audience">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:available"><data type="string"/></element>
+                        <element name="dct:available">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:bibliographicCitation"><data type="string"/></element>
+                        <element name="dct:bibliographicCitation">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:conformsTo"><data type="string"/></element>
+                        <element name="dct:conformsTo">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:contributor"><data type="string"/></element>
+                        <element name="dct:contributor">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:coverage"><data type="string"/></element>
+                        <element name="dct:coverage">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:created"><data type="string"/></element>
+                        <element name="dct:created">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:creator"><data type="string"/></element>
+                        <element name="dct:creator">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:date"><data type="string"/></element>
+                        <element name="dct:date">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:dateAccepted"><data type="string"/></element>
+                        <element name="dct:dateAccepted">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:dateCopyrighted"><data type="string"/></element>
+                        <element name="dct:dateCopyrighted">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:description"><data type="string"/></element>
+                        <element name="dct:description">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:educationLevel"><data type="string"/></element>
+                        <element name="dct:educationLevel">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:extent"><data type="string"/></element>
+                        <element name="dct:extent">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:format"><data type="string"/></element>
+                        <element name="dct:format">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:hasFormat"><data type="string"/></element>
+                        <element name="dct:hasFormat">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:hasPart"><data type="string"/></element>
+                        <element name="dct:hasPart">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:hasVersion"><data type="string"/></element>
+                        <element name="dct:hasVersion">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:identifier"><data type="string"/></element>
+                        <element name="dct:identifier">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:instructionalMethod"><data type="string"/></element>
+                        <element name="dct:instructionalMethod">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:isFormatOf"><data type="string"/></element>
+                        <element name="dct:isFormatOf">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:isPartOf"><data type="string"/></element>
+                        <element name="dct:isPartOf">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:isReferencedBy"><data type="string"/></element>
+                        <element name="dct:isReferencedBy">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:isReplacedBy"><data type="string"/></element>
+                        <element name="dct:isReplacedBy">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:isRequiredBy"><data type="string"/></element>
+                        <element name="dct:isRequiredBy">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:issued"><data type="string"/></element>
+                        <element name="dct:issued">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:isVersionOf"><data type="string"/></element>
+                        <element name="dct:isVersionOf">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:language"><data type="string"/></element>
+                        <element name="dct:language">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:license"><data type="string"/></element>
+                        <element name="dct:license">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:mediator"><data type="string"/></element>
+                        <element name="dct:mediator">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:medium"><data type="string"/></element>
+                        <element name="dct:medium">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:modified"><data type="string"/></element>
+                        <element name="dct:modified">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:provenance"><data type="string"/></element>
+                        <element name="dct:provenance">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:publisher"><data type="string"/></element>
+                        <element name="dct:publisher">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:references"><data type="string"/></element>
+                        <element name="dct:references">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:relation"><data type="string"/></element>
+                        <element name="dct:relation">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:replaces"><data type="string"/></element>
+                        <element name="dct:replaces">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:requires"><data type="string"/></element>
+                        <element name="dct:requires">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:rights"><data type="string"/></element>
+                        <element name="dct:rights">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:rightsHolder"><data type="string"/></element>
+                        <element name="dct:rightsHolder">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:source"><data type="string"/></element>
+                        <element name="dct:source">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:spatial"><data type="string"/></element>
+                        <element name="dct:spatial">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:subject"><data type="string"/></element>
+                        <element name="dct:subject">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:tableOfContents"><data type="string"/></element>
+                        <element name="dct:tableOfContents">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:title"><data type="string"/></element>
+                        <element name="dct:title">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:type"><data type="string"/></element>
+                        <element name="dct:type">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="dct:valid"><data type="string"/></element>
+                        <element name="dct:valid">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <zeroOrMore>
-                        <element name="ds:Reviewer"><data type="string"/></element>
+                        <element name="ds:Reviewer">
+                            <data type="string"/>
+                        </element>
                     </zeroOrMore>
                     <optional>
-                        <element name="ds:LandingPage"><data type="anyURI"/></element>
+                        <element name="ds:LandingPage">
+                            <data type="anyURI"/>
+                        </element>
                     </optional>
                     <optional>
-                        <element name="ds:Endpoint"><data type="anyURI"/></element>
+                        <element name="ds:Endpoint">
+                            <data type="anyURI"/>
+                        </element>
                     </optional>
                 </interleave>
             </choice>
@@ -210,9 +325,13 @@
 
     <define name="ds.Provenance">
         <element name="ds:Provenance">
-            <text/>
+            <choice>
+                <ref name="prov"/>
+                <text/>
+            </choice>
         </element>
     </define>
+
     <define name="ds.Story">
         <element name="ds:Story">
             <oneOrMore>
@@ -220,7 +339,7 @@
             </oneOrMore>
         </element>
     </define>
-    
+
     <define name="ds.Block">
         <element name="ds:Block">
             <attribute name="xml:id">
@@ -271,7 +390,7 @@
             </oneOrMore>
         </element>
     </define>
-    
+
     <define name="ds.Cues">
         <element name="ds:Cues">
             <interleave>
@@ -291,11 +410,11 @@
                         <text/>
                     </element>
                 </optional>
-                <ref name="any"></ref>
+                <ref name="any"/>
             </interleave>
         </element>
     </define>
-    
+
     <define name="type">
         <attribute name="type">
             <choice>
@@ -304,13 +423,41 @@
             </choice>
         </attribute>
     </define>
-    
+
     <define name="ds.Data">
         <element name="ds:Data">
-            <text/>
+            <oneOrMore>
+                <ref name="ds.Run"/>
+            </oneOrMore>
         </element>
     </define>
-    
+
+    <define name="ds.Run">
+        <element name="ds:Run">
+            <attribute name="when">
+                <data type="dateTime"/>
+            </attribute>
+            <oneOrMore>
+                <element name="ds:Resource">
+                    <optional>
+                        <attribute name="ds:ref">
+                            <data type="IDREF"/>
+                        </attribute>
+                    </optional>
+                    <attribute name="mime">
+                        <data type="string"/>
+                    </attribute>
+                    <attribute name="href">
+                        <data type="anyURI"/>
+                    </attribute>
+                    <optional>
+                        <ref name="ds.Provenance"/>
+                    </optional>
+                </element>
+            </oneOrMore>
+        </element>
+    </define>
+
     <define name="any">
         <zeroOrMore>
             <element>
@@ -345,5 +492,32 @@
             </element>
         </zeroOrMore>
     </define>
-    
+
+    <define name="prov">
+        <zeroOrMore>
+            <element ns="http://www.w3.org/ns/prov#">
+                <anyName>
+                    <except>
+                        <nsName ns="http://example.com/ds/"/>
+                    </except>
+                </anyName>
+                <zeroOrMore>
+                    <attribute ns="http://www.w3.org/ns/prov#">
+                        <anyName>
+                            <except>
+                                <nsName ns="http://example.com/ds/"/>
+                            </except>
+                        </anyName>
+                    </attribute>
+                </zeroOrMore>
+                <interleave>
+                    <ref name="prov"/>
+                    <optional>
+                        <text/>
+                    </optional>
+                </interleave>
+            </element>
+        </zeroOrMore>
+    </define>
+
 </grammar>

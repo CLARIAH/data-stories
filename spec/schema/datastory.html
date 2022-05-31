@@ -1,0 +1,248 @@
+<!DOCTYPE HTML><html xmlns:rng="http://relaxng.org/ns/structure/1.0">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Data Story specification</title>
+      <style type="text/css">
+	  BODY
+	  {
+	    margin-left: 10px;
+	    font-family: Verdana, sans-serif;
+	    font-size: 11px;
+	  }
+	  TD
+	  {
+	    font-family: Verdana, sans-serif;
+	    font-size: 11px;
+	  }
+	  .decl { color: #006400; }
+	  A.def:link, A.def:visited
+	  { font-weight: bold; color: #001188; text-decoration: none; }
+	  A.def:hover
+	  { font-weight: bold; color: #0055ff; text-decoration: underline; }
+	  A.ref:link, A.ref:visited { color: #000000; text-decoration: none; }
+	  A.ref:hover { color: #0055ff; text-decoration: underline; }
+	  A.ix-ref:link, A.ix-ref:visited { color: #0000bb; }
+	  A.ix-ref:hover { color: #0055ff; }
+	  .nc { color: #0000aa; }
+	  .str { color: #8b0000; }
+	  A.href:link, A.href:visited 
+	  { color: #8b0000; text-decoration: none; }
+	  A.href:hover { color: #0055ff; text-decoration: underline; }
+	  .prefix { color: #0000aa; }
+	  .param { color: #000000; }
+	  .comment { color: #008b00; }
+	  .annot { color: #666666; }
+	  .title
+	  { 
+	    font-family: Arial, Verdana, sans-serif; font-size: 18pt; 
+	    margin-left: 10px;
+	    margin-top: 10px;
+	    margin-bottom: 10px;
+	  }
+	  .heading
+	  { 
+	    font-family: Arial, Verdana, sans-serif; font-size: 14pt; 
+	    margin-left: 10px;
+	    margin-top: 4px;
+	    margin-bottom: 4px;
+	  }
+	  TD.head { color: #ffffff; background-color: #29445a; }
+	  TD.line { background-color: #6d8090; font-size: 3px;}
+	  .title-line TD { background-color: #6d8090; }
+	  DIV.section 
+	  { 
+	    margin-left: 10px; 
+	    margin-top: 15px;
+            margin-bottom: 15px;
+          }
+	  DIV.ix-definitions 
+	  { 
+	    margin-left: 26px; 
+	    text-indent: -10px; 
+            margin-bottom: 4px;
+          }
+	  DIV.ix-section 
+	  { 
+	    margin-left: 16px; 
+            margin-bottom: 4px;
+          }
+	  TABLE.back-ref { margin-left: 10px; }
+	  TABLE.back-ref TD { padding-right: 8px; }
+	  .ix-entry 
+	  { 
+	    margin-bottom: 4px; 
+            width: 100%;
+	    background-color: #f0f0f0;
+	    border-style: solid;
+            border-width: 1px;
+            border-color: #6d8090;
+	    margin-right: 10px;
+	    padding: 4px;
+	  }
+	  .ix-heading
+	  { margin-bottom: 4px; font-weight: bold; color: #001188; }
+	  .no-ref { color: red; font-weight: bold; }
+	  .index-ref
+	  {
+	    margin-right: 10px;
+	    margin-bottom: 2px;
+	    font-family: Arial, Verdana, sans-serif; 
+            font-size: 10pt;
+	  }
+	  .index-ref A:link, .index-ref A:visited { color: #ffffff; }
+	  .index-ref A:hover { color: #aaffff; }
+	</style>
+   </head>
+   <body>
+      <table cellpadding="0" cellspacing="0" border="0" width="100%">
+         <tr>
+            <td class="head">
+               <div class="title">Data Story specification</div>
+            </td>
+         </tr>
+         <tr class="title-line">
+            <td align="right">
+               <div class="index-ref"><a href="#index">Index</a></div>
+            </td>
+         </tr>
+      </table>
+      <div class="section"><b class="decl">default namespace</b> <span class="prefix">ds</span> = <span class="str">"http://example.com/ds/"</span><br><span style="margin-left: .0ex;"></span><b class="decl">namespace</b> <span class="prefix">local</span> = <span class="str">""</span><br><span style="margin-left: .0ex;"></span><b class="decl">namespace</b> <span class="prefix">inh</span> = <b>inherit</b><br><span style="margin-left: .0ex;"></span><b class="decl">namespace</b> <span class="prefix">d3e300a1092</span> = <span class="str">"http://www.w3.org/ns/prov#"</span><br><span style="margin-left: .0ex;"></span><b class="decl">namespace</b> <span class="prefix">d3e305a1092</span> = <span class="str">"http://www.w3.org/ns/prov#"</span><br><span style="margin-left: .0ex;"></span><b class="decl">namespace</b> <span class="prefix">dct</span> = <span class="str">"http://purl.org/dc/terms/"</span><br><span style="margin-left: .0ex;"></span><b class="decl">namespace</b> <span class="prefix">xhtml</span> = <span class="str">"http://www.w3.org/1999/xhtml"</span><br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><span class="annot">xhtml:title</span> <span class="annot">[</span> <span class="str">"Data Story specification"</span> <span class="annot">]</span><br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><span class="annot">xhtml:p</span> <span class="annot">[</span> <span class="str">"""<br>        DIT IS EEN TEST<br>    """</span> <span class="annot">]</span><br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><a href="#d4e109-ix" class="def" id="d4e109">start</a> = <a class="ref" href="#d4e121">ds.DataStory</a><br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><a href="#d4e121-ix" class="def" id="d4e121">ds.DataStory</a> =<br><span style="margin-left: 2.55ex;"></span><b>element</b> <span class="nc">ds:DataStory</span> { <a class="ref" href="#d4e204">ds.Metadata</a>, <a class="ref" href="#d4e1775">ds.Provenance</a>?, <a class="ref" href="#d4e1811">ds.Story</a>, <a class="ref" href="#d4e2231">ds.Data</a>?, <b>attribute</b> <span class="nc">xml:lang</span> { <i>xsd:language</i> }? }<br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><a href="#d4e204-ix" class="def" id="d4e204">ds.Metadata</a> =<br><span style="margin-left: 2.55ex;"></span><b>element</b> <span class="nc">ds:Metadata</span><br><span style="margin-left: 2.55ex;"></span>{<br><span style="margin-left: 5.1ex;"></span><i>text</i><br><span style="margin-left: 3.4ex;"></span>|&nbsp;(<br><span style="margin-left: 7.65ex;"></span><b>element</b> <span class="nc">dct:abstract</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:accessRights</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:accrualMethod</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:accrualPeriodicity</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:accrualPolicy</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:alternative</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:audience</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:available</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:bibliographicCitation</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:conformsTo</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:contributor</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:coverage</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:created</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:creator</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:date</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:dateAccepted</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:dateCopyrighted</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:description</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:educationLevel</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:extent</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:format</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:hasFormat</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:hasPart</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:hasVersion</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:identifier</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:instructionalMethod</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:isFormatOf</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:isPartOf</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:isReferencedBy</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:isReplacedBy</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:isRequiredBy</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:issued</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:isVersionOf</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:language</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:license</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:mediator</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:medium</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:modified</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:provenance</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:publisher</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:references</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:relation</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:replaces</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:requires</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:rights</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:rightsHolder</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:source</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:spatial</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:subject</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:tableOfContents</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:title</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:type</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">dct:valid</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">ds:Reviewer</span> { <i>xsd:string</i> }*<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">ds:LandingPage</span> { <i>xsd:anyURI</i> }?<br><span style="margin-left: 5.95ex;"></span>&amp;&nbsp;<b>element</b> <span class="nc">ds:Endpoint</span> { <i>xsd:anyURI</i> }?<br><span style="margin-left: 5.1ex;"></span>)<br><span style="margin-left: 2.55ex;"></span>}<br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><a href="#d4e1775-ix" class="def" id="d4e1775">ds.Provenance</a> = <b>element</b> <span class="nc">ds:Provenance</span> { <a class="ref" href="#d4e2518">prov</a> |&nbsp;<i>text</i> }<br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><a href="#d4e1811-ix" class="def" id="d4e1811">ds.Story</a> = <b>element</b> <span class="nc">ds:Story</span> { <a class="ref" href="#d4e1844">ds.Block</a>+ }<br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><a href="#d4e1844-ix" class="def" id="d4e1844">ds.Block</a> =<br><span style="margin-left: 2.55ex;"></span><b>element</b> <span class="nc">ds:Block</span><br><span style="margin-left: 2.55ex;"></span>{<br><span style="margin-left: 5.1ex;"></span><b>attribute</b> <span class="nc">xml:id</span> { <i>xsd:ID</i> },<br><span style="margin-left: 5.1ex;"></span><b>attribute</b> <span class="nc">type</span> { <span class="str">"text"</span> |&nbsp;<span class="str">"query"</span> |&nbsp;<span class="str">"media"</span> },<br><span style="margin-left: 5.1ex;"></span><b>attribute</b> <span class="nc">mime</span><br><span style="margin-left: 5.1ex;"></span>{<br><span style="margin-left: 7.65ex;"></span><span class="str">"text/plain"</span><br><span style="margin-left: 5.95ex;"></span>|&nbsp;<span class="str">"text/markdown"</span><br><span style="margin-left: 5.95ex;"></span>|&nbsp;<span class="str">"text/html"</span><br><span style="margin-left: 5.95ex;"></span>|&nbsp;<span class="str">"application/xhtml+xml"</span><br><span style="margin-left: 5.95ex;"></span>|&nbsp;<span class="str">"application/sparql-query"</span><br><span style="margin-left: 5.95ex;"></span>|&nbsp;<span class="str">"image/gif"</span><br><span style="margin-left: 5.95ex;"></span>|&nbsp;<span class="str">"image/png"</span><br><span style="margin-left: 5.1ex;"></span>}?,<br><span style="margin-left: 5.1ex;"></span>( <a class="ref" href="#d4e204">ds.Metadata</a>? &amp;&nbsp;<a class="ref" href="#d4e1775">ds.Provenance</a>? &amp;&nbsp;<a class="ref" href="#d4e2093">ds.Cues</a>? ),<br><span style="margin-left: 5.1ex;"></span>( <b>attribute</b> <span class="nc">href</span> { <i>xsd:anyURI</i> } |&nbsp;<i>text</i> ),<br><span style="margin-left: 5.1ex;"></span>( <i>text</i> &amp;&nbsp;<a class="ref" href="#d4e2413">any</a> )+<br><span style="margin-left: 2.55ex;"></span>}<br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><a href="#d4e2093-ix" class="def" id="d4e2093">ds.Cues</a> =<br><span style="margin-left: 2.55ex;"></span><b>element</b> <span class="nc">ds:Cues</span> { <b>element</b> <span class="nc">ds:title-prologue</span> { <a class="ref" href="#d4e2195">type</a>?, <i>text</i> }? &amp;&nbsp;<b>element</b> <span class="nc">ds:visualisation</span> { <a class="ref" href="#d4e2195">type</a>?, <i>text</i> }? &amp;&nbsp;<a class="ref" href="#d4e2413">any</a> }<br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><a href="#d4e2195-ix" class="def" id="d4e2195">type</a> = <b>attribute</b> <span class="nc">type</span> { <span class="str">"template"</span> |&nbsp;<span class="str">"json"</span> }<br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><a href="#d4e2231-ix" class="def" id="d4e2231">ds.Data</a> = <b>element</b> <span class="nc">ds:Data</span> { <a class="ref" href="#d4e2264">ds.Run</a>+ }<br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><a href="#d4e2264-ix" class="def" id="d4e2264">ds.Run</a> =<br><span style="margin-left: 2.55ex;"></span><b>element</b> <span class="nc">ds:Run</span><br><span style="margin-left: 2.55ex;"></span>{<br><span style="margin-left: 5.1ex;"></span><b>attribute</b> <span class="nc">when</span> { <i>xsd:dateTime</i> },<br><span style="margin-left: 5.1ex;"></span><b>element</b> <span class="nc">ds:Resource</span><br><span style="margin-left: 5.1ex;"></span>{<br><span style="margin-left: 7.65ex;"></span><b>attribute</b> <span class="nc">ds:ref</span> { <i>xsd:IDREF</i> }?,<br><span style="margin-left: 7.65ex;"></span><b>attribute</b> <span class="nc">mime</span> { <i>xsd:string</i> },<br><span style="margin-left: 7.65ex;"></span><b>attribute</b> <span class="nc">href</span> { <i>xsd:anyURI</i> },<br><span style="margin-left: 7.65ex;"></span><a class="ref" href="#d4e1775">ds.Provenance</a>?<br><span style="margin-left: 5.1ex;"></span>}+<br><span style="margin-left: 2.55ex;"></span>}<br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><a href="#d4e2413-ix" class="def" id="d4e2413">any</a> = <b>element</b> <span class="nc">* - ds:*</span> { <b>attribute</b> <span class="nc">ds:type</span> { <span class="str">"template"</span> |&nbsp;<span class="str">"json"</span> }?, <b>attribute</b> <span class="nc">* - ds:*</span> { <i>text</i> }*, ( <a class="ref" href="#d4e2413">any</a> &amp;&nbsp;<i>text</i>? ) }*<br><span style="margin-left: .0ex;"></span><br><span style="margin-left: .0ex;"></span><a href="#d4e2518-ix" class="def" id="d4e2518">prov</a> = <b>element</b> <span class="nc">* - ds:*</span> { <b>attribute</b> <span class="nc">* - ds:*</span> { <i>text</i> }*, ( <a class="ref" href="#d4e2518">prov</a> &amp;&nbsp;<i>text</i>? ) }*</div>
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" id="index">
+         <tr>
+            <td class="head">
+               <div class="heading">Index</div>
+            </td>
+         </tr>
+         <tr>
+            <td class="line" align="right">&nbsp;</td>
+         </tr>
+      </table>
+      <div class="section">
+         <div class="ix-entry" id="d4e109-ix">
+            <div class="ix-heading">start</div>
+            <div class="ix-definitions"><b>Definitions: </b><a class="ix-ref" href="#d4e109">1</a></div>
+         </div>
+         <div class="ix-entry" id="d4e2413-ix">
+            <div class="ix-heading">any</div>
+            <div class="ix-definitions"><b>Definitions: </b><a class="ix-ref" href="#d4e2413">1</a></div>
+            <div class="ix-section"><b>Referenced from: </b><table cellpadding="0" cellspacing="0" border="0" class="back-ref">
+                  <tr valign="top">
+                     <td>
+                        <nobr><a class="ix-ref" href="#d4e2413">any</a></nobr><br><nobr><a class="ix-ref" href="#d4e1844">ds.Block</a></nobr><br><nobr><a class="ix-ref" href="#d4e2093">ds.Cues</a></nobr><br></td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="ix-entry" id="d4e1844-ix">
+            <div class="ix-heading">ds.Block</div>
+            <div class="ix-definitions"><b>Definitions: </b><a class="ix-ref" href="#d4e1844">1</a></div>
+            <div class="ix-section"><b>Referenced from: </b><table cellpadding="0" cellspacing="0" border="0" class="back-ref">
+                  <tr valign="top">
+                     <td>
+                        <nobr><a class="ix-ref" href="#d4e1811">ds.Story</a></nobr><br></td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="ix-entry" id="d4e2093-ix">
+            <div class="ix-heading">ds.Cues</div>
+            <div class="ix-definitions"><b>Definitions: </b><a class="ix-ref" href="#d4e2093">1</a></div>
+            <div class="ix-section"><b>Referenced from: </b><table cellpadding="0" cellspacing="0" border="0" class="back-ref">
+                  <tr valign="top">
+                     <td>
+                        <nobr><a class="ix-ref" href="#d4e1844">ds.Block</a></nobr><br></td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="ix-entry" id="d4e2231-ix">
+            <div class="ix-heading">ds.Data</div>
+            <div class="ix-definitions"><b>Definitions: </b><a class="ix-ref" href="#d4e2231">1</a></div>
+            <div class="ix-section"><b>Referenced from: </b><table cellpadding="0" cellspacing="0" border="0" class="back-ref">
+                  <tr valign="top">
+                     <td>
+                        <nobr><a class="ix-ref" href="#d4e121">ds.DataStory</a></nobr><br></td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="ix-entry" id="d4e121-ix">
+            <div class="ix-heading">ds.DataStory</div>
+            <div class="ix-definitions"><b>Definitions: </b><a class="ix-ref" href="#d4e121">1</a></div>
+            <div class="ix-section"><b>Referenced from: </b><table cellpadding="0" cellspacing="0" border="0" class="back-ref">
+                  <tr valign="top">
+                     <td>
+                        <nobr><a class="ix-ref" href="#d4e109">start</a></nobr><br></td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="ix-entry" id="d4e204-ix">
+            <div class="ix-heading">ds.Metadata</div>
+            <div class="ix-definitions"><b>Definitions: </b><a class="ix-ref" href="#d4e204">1</a></div>
+            <div class="ix-section"><b>Referenced from: </b><table cellpadding="0" cellspacing="0" border="0" class="back-ref">
+                  <tr valign="top">
+                     <td>
+                        <nobr><a class="ix-ref" href="#d4e1844">ds.Block</a></nobr><br><nobr><a class="ix-ref" href="#d4e121">ds.DataStory</a></nobr><br></td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="ix-entry" id="d4e1775-ix">
+            <div class="ix-heading">ds.Provenance</div>
+            <div class="ix-definitions"><b>Definitions: </b><a class="ix-ref" href="#d4e1775">1</a></div>
+            <div class="ix-section"><b>Referenced from: </b><table cellpadding="0" cellspacing="0" border="0" class="back-ref">
+                  <tr valign="top">
+                     <td>
+                        <nobr><a class="ix-ref" href="#d4e1844">ds.Block</a></nobr><br><nobr><a class="ix-ref" href="#d4e121">ds.DataStory</a></nobr><br><nobr><a class="ix-ref" href="#d4e2264">ds.Run</a></nobr><br></td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="ix-entry" id="d4e2264-ix">
+            <div class="ix-heading">ds.Run</div>
+            <div class="ix-definitions"><b>Definitions: </b><a class="ix-ref" href="#d4e2264">1</a></div>
+            <div class="ix-section"><b>Referenced from: </b><table cellpadding="0" cellspacing="0" border="0" class="back-ref">
+                  <tr valign="top">
+                     <td>
+                        <nobr><a class="ix-ref" href="#d4e2231">ds.Data</a></nobr><br></td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="ix-entry" id="d4e1811-ix">
+            <div class="ix-heading">ds.Story</div>
+            <div class="ix-definitions"><b>Definitions: </b><a class="ix-ref" href="#d4e1811">1</a></div>
+            <div class="ix-section"><b>Referenced from: </b><table cellpadding="0" cellspacing="0" border="0" class="back-ref">
+                  <tr valign="top">
+                     <td>
+                        <nobr><a class="ix-ref" href="#d4e121">ds.DataStory</a></nobr><br></td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="ix-entry" id="d4e2518-ix">
+            <div class="ix-heading">prov</div>
+            <div class="ix-definitions"><b>Definitions: </b><a class="ix-ref" href="#d4e2518">1</a></div>
+            <div class="ix-section"><b>Referenced from: </b><table cellpadding="0" cellspacing="0" border="0" class="back-ref">
+                  <tr valign="top">
+                     <td>
+                        <nobr><a class="ix-ref" href="#d4e1775">ds.Provenance</a></nobr><br><nobr><a class="ix-ref" href="#d4e2518">prov</a></nobr><br></td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="ix-entry" id="d4e2195-ix">
+            <div class="ix-heading">type</div>
+            <div class="ix-definitions"><b>Definitions: </b><a class="ix-ref" href="#d4e2195">1</a></div>
+            <div class="ix-section"><b>Referenced from: </b><table cellpadding="0" cellspacing="0" border="0" class="back-ref">
+                  <tr valign="top">
+                     <td>
+                        <nobr><a class="ix-ref" href="#d4e2093">ds.Cues</a></nobr><br></td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>
