@@ -48,14 +48,9 @@
                         <prov:location>https://public.flourish.studio/visualisation/1925837/embed</prov:location>
                     </prov:entity>
                 -->
-                <!-- -->
-                 <prov:entity prov:id="jupyb5">
-                    <prov:location>https://github.com/beeldengeluid/ds-dwdd/blob/949bcd2b32350ae254380817b7b4e1fb7a70b770/notebooks/DWDD%20demo%20notebook.ipynb</prov:location>
-                </prov:entity> 
-                <!-- -->
                 <prov:wasDerivedFrom>
                     <prov:generatedEntity prov:ref="b5"/>
-                    <prov:usedEntity prov:ref="jupyb5"/>
+                    <prov:usedEntity prov:ref="jupy"/>
                 </prov:wasDerivedFrom>
             </ds:Provenance>
             <ds:Cues>
