@@ -6,10 +6,6 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml">
     
     <xhtml:title>Data Story specification</xhtml:title>
-    <xhtml:p>
-        DIT IS EEN TEST
-    </xhtml:p>
-    
     <start>
         <ref name="ds.DataStory"/>
     </start>
