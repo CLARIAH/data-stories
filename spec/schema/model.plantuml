@@ -1,0 +1,32 @@
+@startuml
+
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Story" as s {
+ }
+
+entity "Block" as b {
+  *_id : number <<generated>>
+  --
+}
+
+entity "Text" as t {}
+entity "Query" as q {}
+entity "Media" as m {}
+
+entity "Data" as d {
+  *_id : number <<generated>>
+  --
+ }
+
+s ||-|{ b
+b ||..|{ d
+b <|-- t
+b <|-- m
+
+@enduml
+
