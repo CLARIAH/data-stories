@@ -6,28 +6,78 @@ hide circle
 ' avoid problems with angled crows feet
 skinparam linetype ortho
 
+entity "DataStory" as ds {
+}
+
 entity "Story" as s {
- }
+}
 
 entity "Block" as b {
-  *_id : number <<generated>>
+  _id[1] : ID | URI
+  mime[1] : { mimetypes }
+  href[0] : URL
+  --
+  href xor embedded content
+}
+
+entity "Text" as t {
+}
+
+entity "Query" as q {
+}
+
+entity "Media" as m {
+}
+
+Entity "Data" as d {
+}
+
+entity "Run" as r {
+  when[1] : dateTime 
+}
+
+entity "Resource" as res {
+  ref[?] : IDREF
+  mime[1] : { mimetypes }
+  href[1] : URL
+  --
+  ref is only optional if
+  there are no other Resources
+  in the Run, i.e. then the
+  Resource contains a dump of
+  the complete Data Story. 
+}
+
+entity "Metadata" as md {
+  dct:*[*] : text
+  ds:LandingPage[?] : URL
+  ds:Endpoint[?] : URL
+}
+
+entity "Provenance" as prov {
+  --
+  TODO
+}
+
+entity "Cues" as cues {
+  (* - ds:*):*[*] : any
+  ds:visualisation[?] : {'table','geo','chart', TODO}
   --
 }
 
-entity "Text" as t {}
-entity "Query" as q {}
-entity "Media" as m {}
-
-entity "Data" as d {
-  *_id : number <<generated>>
-  --
- }
-
-s ||-|{ b
-b ||..|{ d
+ds ||-|| s : ds:hasStory
+ds ||-o{ d : ds:hasData
+ds |o-o| prov : hasProvenance
+ds |o-o| md : hasMetadata
+s ||-|{ b : hasBlock[]
+b |o-o| md : ds:hasMetadata
+b |o-o| prov : ds:hasProvenance
+b |o-o| cues : ds:hasCues
 b <|-- t
 b <|-- q
 b <|-- m
+d ||-|{ r : ds:hasRun
+r ||-|{ res : hasResource
+res }o-o| q : for Resource
 
 @enduml
-
